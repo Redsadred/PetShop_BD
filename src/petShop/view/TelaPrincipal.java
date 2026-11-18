@@ -9,6 +9,7 @@ public class TelaPrincipal extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
+
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(5, 1, 10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 40));
@@ -21,6 +22,12 @@ public class TelaPrincipal extends JFrame {
         JButton btnFuncionario = new JButton("Funcionário");
         JButton btnProcedimento = new JButton("Procedimento");
         JButton btnSair = new JButton("Sair");
+
+        btnAnimal.addActionListener(e -> new TelaAnimal());
+        btnCliente.addActionListener(e -> new TelaCliente());
+        btnFuncionario.addActionListener(e -> new TelaFuncionario());
+        btnProcedimento.addActionListener(e -> new TelaProcedimento());
+        btnSair.addActionListener(e -> System.exit(0));
 
         panel.add(titulo);
         panel.add(btnAnimal);

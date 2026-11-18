@@ -1,7 +1,6 @@
 package src.petShop.model;
 
 public class Cliente {
-    
     private int idCliente;
     private String nomeCliente;
     private String telefoneCliente;
