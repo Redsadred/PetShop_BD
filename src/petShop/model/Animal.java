@@ -15,27 +15,27 @@ public class Animal {
         this.idadeAnimal = idadeAnimal;
         this.idCliente = idCliente;
     }
-    
+
     public int getIdAnimal() {
         return idAnimal;
     }
-    
+
     public String getNomeAnimal() {
         return nomeAnimal;
     }
-    
+
     public String getRacaAnimal() {
         return racaAnimal;
     }
-    
+
     public String getEspecieAnimal() {
         return especieAnimal;
     }
-    
+
     public int getIdadeAnimal() {
         return idadeAnimal;
     }
-    
+
     public int getIdCliente() {
         return idCliente;
     }
