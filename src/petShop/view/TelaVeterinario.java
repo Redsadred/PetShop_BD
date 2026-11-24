@@ -1,17 +1,17 @@
 package src.petShop.view;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class TelaFuncionario extends JFrame {
+public class TelaVeterinario extends JFrame {
 
     private JTextField campoNome;
     private JTextField campoTelefone;
-    private JTextField campoCargo;
+    private JTextField campoEspecialidade;
 
-    public TelaFuncionario() {
-
-        setTitle("Cadastro de Funcionários");
-        setSize(400, 300);
+    public TelaVeterinario() {
+        setTitle("Cadastro de Veterinário");
+        setSize(400, 280);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -20,7 +20,7 @@ public class TelaFuncionario extends JFrame {
 
         campoNome = new JTextField();
         campoTelefone = new JTextField();
-        campoCargo = new JTextField();
+        campoEspecialidade = new JTextField();
 
         JButton btnCadastrar = new JButton("Cadastrar");
         JButton btnLimpar = new JButton("Limpar");
@@ -31,8 +31,8 @@ public class TelaFuncionario extends JFrame {
         painel.add(new JLabel("Telefone:"));
         painel.add(campoTelefone);
 
-        painel.add(new JLabel("Cargo:"));
-        painel.add(campoCargo);
+        painel.add(new JLabel("Especialidade:"));
+        painel.add(campoEspecialidade);
 
         painel.add(btnCadastrar);
         painel.add(btnLimpar);
@@ -46,27 +46,27 @@ public class TelaFuncionario extends JFrame {
     }
 
     private void cadastrar() {
+        String nome = campoNome.getText().trim();
+        String telefone = campoTelefone.getText().trim();
+        String especialidade = campoEspecialidade.getText().trim();
 
-        String nome = campoNome.getText();
-        String telefone = campoTelefone.getText();
-        String cargo = campoCargo.getText();
-
-        if (nome.isEmpty() || telefone.isEmpty() || cargo.isEmpty()) {
+        if (nome.isEmpty() || telefone.isEmpty()
+                || especialidade.isEmpty()) {
 
             JOptionPane.showMessageDialog(this,
-                "Preencha todos os campos!");
-
+                    "Preencha todos os campos!");
             return;
         }
 
         JOptionPane.showMessageDialog(this,
-            "Funcionário preparado para cadastro: " + nome);
+                "Veterinário preparado para cadastro: " + nome);
+
+        limpar();
     }
 
     private void limpar() {
         campoNome.setText("");
         campoTelefone.setText("");
-        campoCargo.setText("");
+        campoEspecialidade.setText("");
     }
 }
-

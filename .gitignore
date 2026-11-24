@@ -1,1 +1,16 @@
+
 config.properties
+.env
+
+*.class
+bin/
+out/
+
+
+.vscode/
+
+
+.DS_Store
+Thumbs.db
+
+*.log

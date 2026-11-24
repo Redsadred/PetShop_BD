@@ -1,5 +1,7 @@
 
-CREATE DATABASE IF NOT EXISTS petshop;
+DROP DATABASE IF EXISTS petshop;
+
+CREATE DATABASE petshop;
 
 USE petshop;
 
@@ -29,18 +31,18 @@ CREATE TABLE animal (
     CHECK (idadeAnimal >= 0)
 );
 
-CREATE TABLE funcionario (
-    idFuncionario INT AUTO_INCREMENT PRIMARY KEY,
-    nomeFuncionario VARCHAR(100) NOT NULL,
-    cargoFuncionario VARCHAR(100) NOT NULL
+CREATE TABLE veterinario (
+    idVeterinario INT AUTO_INCREMENT PRIMARY KEY,
+    nomeVeterinario VARCHAR(100) NOT NULL,
+    especialidadeVeterinario VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE telefone_funcionario (
-    idTelefoneFuncionario INT AUTO_INCREMENT PRIMARY KEY,
-    telefoneFuncionario VARCHAR(20) NOT NULL,
-    idFuncionario INT NOT NULL,
-    FOREIGN KEY (idFuncionario)
-        REFERENCES funcionario(idFuncionario)
+CREATE TABLE telefone_veterinario (
+    idTelefoneVeterinario INT AUTO_INCREMENT PRIMARY KEY,
+    telefoneVeterinario VARCHAR(20) NOT NULL,
+    idVeterinario INT NOT NULL,
+    FOREIGN KEY (idVeterinario)
+        REFERENCES veterinario(idVeterinario)
         ON DELETE CASCADE
 );
 
@@ -49,19 +51,12 @@ CREATE TABLE procedimento (
     nomeProcedimento VARCHAR(100) NOT NULL,
     descricaoProcedimento TEXT,
     valorProcedimento DECIMAL(10,2) NOT NULL,
-    CHECK (valorProcedimento >= 0)
-);
-
-CREATE TABLE atendimento (
-    idAtendimento INT AUTO_INCREMENT PRIMARY KEY,
-    dataAtendimento DATETIME NOT NULL,
+    dataProcedimento DATETIME NOT NULL,
     idAnimal INT NOT NULL,
-    idProcedimento INT NOT NULL,
-    idFuncionario INT NOT NULL,
+    idVeterinario INT NOT NULL,
     FOREIGN KEY (idAnimal)
         REFERENCES animal(idAnimal),
-    FOREIGN KEY (idProcedimento)
-        REFERENCES procedimento(idProcedimento),
-    FOREIGN KEY (idFuncionario)
-        REFERENCES funcionario(idFuncionario)
+    FOREIGN KEY (idVeterinario)
+        REFERENCES veterinario(idVeterinario),
+    CHECK (valorProcedimento >= 0)
 );

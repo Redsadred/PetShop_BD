@@ -1,41 +1,44 @@
 package src.petShop.view;
+
 import java.awt.*;
 import javax.swing.*;
 
 public class TelaPrincipal extends JFrame {
+
     public TelaPrincipal() {
         setTitle("Pet Shop");
-        setSize(400, 300);
+        setSize(400, 350);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(5, 1, 10, 10));
-        panel.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 40));
+        JPanel painel = new JPanel();
+        painel.setLayout(new GridLayout(6, 1, 10, 10));
+        painel.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 40));
 
         JLabel titulo = new JLabel("Pet Shop");
-        titulo.setFont(new Font("Arial", Font.BOLD,20));
-        
+        titulo.setFont(new Font("Arial", Font.BOLD, 20));
+
         JButton btnAnimal = new JButton("Animal");
         JButton btnCliente = new JButton("Cliente");
-        JButton btnFuncionario = new JButton("Funcionário");
+        JButton btnVeterinario = new JButton("Veterinário");
         JButton btnProcedimento = new JButton("Procedimento");
         JButton btnSair = new JButton("Sair");
 
         btnAnimal.addActionListener(e -> new TelaAnimal());
         btnCliente.addActionListener(e -> new TelaCliente());
-        btnFuncionario.addActionListener(e -> new TelaFuncionario());
+        btnVeterinario.addActionListener(e -> new TelaVeterinario());
         btnProcedimento.addActionListener(e -> new TelaProcedimento());
         btnSair.addActionListener(e -> System.exit(0));
 
-        panel.add(titulo);
-        panel.add(btnAnimal);
-        panel.add(btnCliente);
-        panel.add(btnFuncionario);
-        panel.add(btnProcedimento);
-        panel.add(btnSair);
+        painel.add(titulo);
+        painel.add(btnAnimal);
+        painel.add(btnCliente);
+        painel.add(btnVeterinario);
+        painel.add(btnProcedimento);
+        painel.add(btnSair);
 
-        add(panel);
+        add(painel);
+
+        setVisible(true);
     }
 }

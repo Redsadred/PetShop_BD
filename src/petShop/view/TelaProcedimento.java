@@ -1,44 +1,65 @@
 package src.petShop.view;
+
 import javax.swing.*;
 import java.awt.*;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class TelaProcedimento extends JFrame {
 
     private JTextField campoNome;
     private JTextField campoValor;
     private JTextArea campoDescricao;
+    private JTextField campoData;
+    private JTextField campoAnimal;
+    private JTextField campoVeterinario;
 
     public TelaProcedimento() {
-
-        setTitle("Cadastro de Procedimentos");
-        setSize(450, 400);
+        setTitle("Cadastro de Procedimento");
+        setSize(500, 450);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        JPanel painel = new JPanel(new GridLayout(5, 1, 10, 10));
+        JPanel painel = new JPanel(new GridLayout(6, 2, 10, 10));
         painel.setBorder(BorderFactory.createEmptyBorder(20, 30, 20, 30));
 
         campoNome = new JTextField();
         campoValor = new JTextField();
-        campoDescricao = new JTextArea(4, 20);
+        campoDescricao = new JTextArea(3, 20);
         campoDescricao.setLineWrap(true);
         campoDescricao.setWrapStyleWord(true);
+        campoData = new JTextField();
+        campoAnimal = new JTextField();
+        campoVeterinario = new JTextField();
 
         JButton btnCadastrar = new JButton("Cadastrar");
         JButton btnLimpar = new JButton("Limpar");
 
         painel.add(new JLabel("Nome do procedimento:"));
         painel.add(campoNome);
+
         painel.add(new JLabel("Descrição:"));
         painel.add(new JScrollPane(campoDescricao));
+
         painel.add(new JLabel("Valor:"));
+        painel.add(campoValor);
+
+        painel.add(new JLabel("Data (AAAA-MM-DD HH:MM:SS):"));
+        painel.add(campoData);
+
+        painel.add(new JLabel("ID do Animal:"));
+        painel.add(campoAnimal);
+
+        painel.add(new JLabel("ID do Veterinário:"));
+        painel.add(campoVeterinario);
 
         JPanel botoes = new JPanel();
         botoes.add(btnCadastrar);
         botoes.add(btnLimpar);
 
         add(painel, BorderLayout.CENTER);
-        add(campoValor, BorderLayout.NORTH);
         add(botoes, BorderLayout.SOUTH);
 
         btnCadastrar.addActionListener(e -> cadastrar());
@@ -48,34 +69,50 @@ public class TelaProcedimento extends JFrame {
     }
 
     private void cadastrar() {
+        String nome = campoNome.getText().trim();
+        String descricao = campoDescricao.getText().trim();
+        String valor = campoValor.getText().trim();
+        String data = campoData.getText().trim();
+        String animal = campoAnimal.getText().trim();
+        String veterinario = campoVeterinario.getText().trim();
 
-        String nome = campoNome.getText();
-        String descricao = campoDescricao.getText();
-        String valor = campoValor.getText();
+        if (nome.isEmpty() || descricao.isEmpty() || valor.isEmpty()
+                || data.isEmpty() || animal.isEmpty() || veterinario.isEmpty()) {
 
-        if (nome.isEmpty() || descricao.isEmpty() || valor.isEmpty()) {
             JOptionPane.showMessageDialog(this,
-                "Preencha todos os campos!");
+                    "Preencha todos os campos!");
             return;
         }
 
         try {
-            double valorProcedimento = Double.parseDouble(
-                valor.replace(",", ".")
+            BigDecimal valorProcedimento = new BigDecimal(valor.replace(",", "."));
+            LocalDateTime dataProcedimento = LocalDateTime.parse(
+                    data,
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
             );
 
-            if (valorProcedimento < 0) {
+            int idAnimal = Integer.parseInt(animal);
+            int idVeterinario = Integer.parseInt(veterinario);
+
+            if (valorProcedimento.compareTo(BigDecimal.ZERO) < 0
+                    || idAnimal <= 0 || idVeterinario <= 0) {
+
                 JOptionPane.showMessageDialog(this,
-                    "O valor não pode ser negativo!");
+                        "Valor não pode ser negativo e os IDs devem ser positivos!");
                 return;
             }
 
             JOptionPane.showMessageDialog(this,
-                "Procedimento preparado para cadastro: " + nome);
+                    "Procedimento preparado para cadastro: " + nome);
+
+            limpar();
 
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this,
-                "Digite um valor válido!");
+                    "Valor e IDs devem ser válidos!");
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Data inválida! Use AAAA-MM-DD HH:MM:SS.");
         }
     }
 
@@ -83,5 +120,8 @@ public class TelaProcedimento extends JFrame {
         campoNome.setText("");
         campoDescricao.setText("");
         campoValor.setText("");
+        campoData.setText("");
+        campoAnimal.setText("");
+        campoVeterinario.setText("");
     }
 }
