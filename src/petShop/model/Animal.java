@@ -43,4 +43,9 @@ public class Animal {
     public void setIdAnimal(int idAnimal) {
         this.idAnimal = idAnimal;
     }
+
+    @Override
+    public String toString() {
+        return nomeAnimal + " (ID: " + idAnimal + ")";
+    }
 }

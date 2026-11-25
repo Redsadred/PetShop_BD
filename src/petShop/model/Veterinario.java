@@ -26,4 +26,9 @@ public class Veterinario {
     public void setIdVeterinario(int idVeterinario) {
         this.idVeterinario = idVeterinario;
     }
+
+    @Override
+    public String toString() {
+        return nomeVeterinario + " (ID: " + idVeterinario + ")";
+    }
 }
